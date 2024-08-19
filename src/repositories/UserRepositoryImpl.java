@@ -31,7 +31,6 @@ public class UserRepositoryImpl implements UserRepository {
                     boolean isLoginUnique = Cache.isLoginUnique(login);
                     if (isLoginUnique && login.matches(Validation.validLogin)) {
                         user.setLogin(login);
-                        Cache.uniqueLogins.add(login);
                     } else {
                         throw new IllegalArgumentException("Логин не соответствует условиям");
                     }
@@ -169,6 +168,7 @@ public class UserRepositoryImpl implements UserRepository {
                         }
                     }
                 }
+                Cache.uniqueLogins.add(login);
                 Cache.uniqueIds.add(user.getId());
                 Cache.users.add(user);
 
